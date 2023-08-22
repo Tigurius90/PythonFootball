@@ -1,8 +1,8 @@
 from funciones import *
 from añadir_equipo import *
 from clases import *
+from añadir_jugador import *
 
-global EquiposAñadidos
 global lista_equipos
 lista_equipos=[]
 
@@ -13,18 +13,22 @@ def main ():
         print (x)
 
 # Chequea que no sea un numero del menu
-    user_input=testea_numero_menu(input())
+    user_input=testea_numero_menu(input(),5,0)
 
     if user_input==0:
         print("Hasta la vista")
         exit()
 
     elif user_input==1:
-        EquiposAñadidos = + 1
-        if EquiposAñadidos > 4:
+        if len(lista_equipos) > 4:
             print ("Numero de equipos excedido, elija otra opcion")
             return main()
         else:
             añadir_equipo(lista_equipos)
-            print(lista_equipos[0].nombre)
+            main()
+
+    elif user_input==2:
+            añadir_jugador(lista_equipos)
+            main()
+
 main()
