@@ -1,4 +1,4 @@
-from classEquipo import Team
+from classTeam import Team
 
 def add_team (teams_list):
     print("Escoge Nombre del Equipo")

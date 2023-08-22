@@ -1,8 +1,35 @@
 from add_player import *
-from classEquipo import *
+from classTeam import *
 from add_team import *
 
 teams_list=[]
+
+def test_score(user_input):
+    if len(user_input)!=3 or user_input[1]!=" ":
+        print("introduce el resultado siguiendo el formato: GolesLocal espacio GolesVisitante")
+        return (10)
+    else:
+        try:
+            if int(user_input[0]) or int(user_input[2]):
+                return (user_input)
+            else:
+                print("introduce el resultado siguiendo el formato: GolesLocal espacio GolesVisitante")
+                return (10)
+        except ValueError:
+            print("introduce el resultado siguiendo el formato: GolesLocal espacio GolesVisitante")
+            return (10) 
+    
+def test_visitorTeam(user_input,min,max,visitor):
+    range_1= range(min,max+1,1)
+    try:
+         if int(user_input) in range_1 and int(visitor)!=int(user_input):
+            return (int(user_input))
+         else:
+            print("introduce un numero dentro del rango y que no sea igual que el local")
+            return (10)
+    except ValueError:
+        print("introduce un numero dentro del rango")
+        return (10)
 
 def test_input(user_input,min,max):
     range_1= range(min,max+1,1)
@@ -31,15 +58,34 @@ def competir (teams_list):
     if show_teams(teams_list,1)==0:
         return
     else:
-        print("¿Cuales es el local?")
-        equipo_local=10
-        while equipo_local==10:
-            equipo_local = test_input(input(),1,len(teams_list)) - 1
-        print("¿Cuales es el visitante?")   
-        equipo_visitante=10
-        while equipo_visitante==10:
-            equipo_visitante = test_input(input(),1,len(teams_list)) - 1
 
+        print("¿Cuales es el local?")
+        localTeam=10
+        while localTeam==10:
+            localTeam = test_input(input(),1,len(teams_list))
+        localTeam=localTeam-1 
+
+        print("¿Cuales es el visitante?")
+        visitorTeam=10
+        while visitorTeam==10:
+            visitorTeam = test_visitorTeam(input(),1,len(teams_list),localTeam+1)
+        visitorTeam=visitorTeam-1
+
+        print("¿Como han quedado?")
+        score=10
+        while score==10:
+             score = test_score(input())
+        localGoals=score[0]
+        visitorGoals=score[2]
+        if localGoals>visitorGoals:
+            teams_list[localTeam].ganados = teams_list[localTeam].ganados + 1
+            teams_list[visitorTeam].perdidos = teams_list[visitorTeam].perdidos + 1
+        elif localGoals<visitorGoals:
+            teams_list[visitorTeam].ganados =teams_list[visitorTeam].ganados + 1
+            teams_list[localTeam].perdidos = teams_list[localTeam].perdidos + 1
+        else:
+            teams_list[visitorTeam].empatados = teams_list[visitorTeam].empatados + 1
+            teams_list[localTeam].empatados = teams_list[localTeam].empatados + 1
         return (teams_list)
     
 
@@ -62,7 +108,7 @@ def add_player (teams_list):
 def add_team (teams_list):
     print("Escoge Nombre del Equipo")
     newName=input()
-    teams_list.append(Team(newName,[],"","",""))
+    teams_list.append(Team(newName,[],0,0,0))
     return (teams_list)
 
 
