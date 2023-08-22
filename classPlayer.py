@@ -1,4 +1,4 @@
 class Player:
-     def __init__(self, nombre, posición):
-        self.posición=posición
+     def __init__(self, nombre, goles):
+        self.goles=goles
         self.nombre= nombre

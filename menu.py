@@ -1,8 +1,32 @@
 from add_player import *
 from classTeam import *
 from add_team import *
+import pandas as pd
+
 
 teams_list=[]
+
+
+def pichichis(teams_list):
+    goals=[]
+    namePlayers=[]
+    c=0
+    for n in range(len(teams_list)):
+        for x in teams_list[c].jugadores:
+            goals.append(x.goles)
+            namePlayers.append(x.nombre)
+        c +=1
+    goalsTable={
+        "Jugadores":namePlayers,
+        "Goles":goals
+    }
+    df = pd.DataFrame(goalsTable)
+    df_sorted=df.sort_values(by='Goles',ascending=False)
+
+    print(df_sorted.head(5))
+
+    return
+
 
 def test_score(user_input):
     if len(user_input)!=3 or user_input[1]!=" ":
@@ -54,7 +78,7 @@ def show_teams(teams_list,num):
             (print("{}-".format(n)+x.nombre))
 
 
-def competir (teams_list):
+def compete (teams_list):
     if show_teams(teams_list,1)==0:
         return
     else:
@@ -75,8 +99,8 @@ def competir (teams_list):
         score=10
         while score==10:
              score = test_score(input())
-        localGoals=score[0]
-        visitorGoals=score[2]
+        localGoals=int(score[0])
+        visitorGoals=int(score[2])
         if localGoals>visitorGoals:
             teams_list[localTeam].ganados = teams_list[localTeam].ganados + 1
             teams_list[visitorTeam].perdidos = teams_list[visitorTeam].perdidos + 1
@@ -86,6 +110,32 @@ def competir (teams_list):
         else:
             teams_list[visitorTeam].empatados = teams_list[visitorTeam].empatados + 1
             teams_list[localTeam].empatados = teams_list[localTeam].empatados + 1
+        while localGoals!=0:
+            print("¿Quien ha metido gol en el equipo local?")
+            n=0
+            for x in teams_list[localTeam].jugadores:
+                print("{}-".format(n)+x.nombre)
+                n+=1
+            playerSelected=10
+            while playerSelected==10:
+             playerSelected = test_input(input(),0,len(teams_list[localTeam].jugadores)-1)  
+            playerSelected = int(playerSelected)
+            teams_list[localTeam].jugadores[playerSelected].goles += 1
+            localGoals-=1
+
+        while visitorGoals!=0:
+            print("¿Quien ha metido gol en el equipo visitante?")
+            n=0
+            for x in teams_list[visitorGoals].jugadores:
+                print("{}-".format(n)+x.nombre)
+                n+=1
+            playerSelected=10
+            while playerSelected==10:
+             playerSelected = test_input(input(),0,len(teams_list[visitorGoals].jugadores)-1)  
+            playerSelected = int(playerSelected)
+            teams_list[visitorGoals].jugadores[playerSelected].goles += 1
+            visitorGoals-=1
+
         return (teams_list)
     
 
@@ -99,7 +149,7 @@ def add_player (teams_list):
                 teamSelected = test_input(input(),1,len(teams_list))
 
         print("Introduce el nombre del jugador")
-        teams_list[teamSelected- 1].jugadores.append(Player(input(),""))
+        teams_list[teamSelected- 1].jugadores.append(Player(input(),0))
         # para testear - cirstobal, hay alguna otra manera de verlo? print (teams_list[0].jugadores[0].nombre)
 
         return (teams_list)
@@ -139,6 +189,10 @@ def menu ():
             menu()
 
     elif user_input==3:
-            competir(teams_list)
+            compete(teams_list)
+            menu()
+
+    elif user_input==5:
+            pichichis(teams_list)
             menu()
 menu()

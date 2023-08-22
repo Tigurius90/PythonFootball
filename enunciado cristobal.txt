@@ -1,7 +1,7 @@
 hacer un menu:
 1- Añadir equipo -> al añadir equipo pregunta si quieres añadir otro (maximo 4 equipos)(el equipo contiene jugadores, partidos ganados, perdidos, empatados)
 2- Añadir jugador -> a que equipo quieres añadirlo de estos?(mostrar listas de equipo)
-3- Competir -> muestra lista de equipos y seleccionas los dos que compiten
+3- compete -> muestra lista de equipos y seleccionas los dos que compiten
 		1- Real madrid
 		2- Barça
 		3- Atleti
