@@ -1,0 +1,22 @@
+hacer un menu:
+1- Añadir equipo -> al añadir equipo pregunta si quieres añadir otro (maximo 4 equipos)(el equipo contiene jugadores, partidos ganados, perdidos, empatados)
+2- Añadir jugador -> a que equipo quieres añadirlo de estos?(mostrar listas de equipo)
+3- Competir -> muestra lista de equipos y seleccionas los dos que compiten
+		1- Real madrid
+		2- Barça
+		3- Atleti
+Cual es el equipo local?
+1
+Cual es el visitante?
+3
+
+Como han quedado?
+2 1 (han quedado dos a cero)
+quien ha metido los goles? -> mostrar lista de jugadores (si son dos goles preguntarlo 2 veces)
+
+Cada victoria son 3 puntos y el empate 1 punto
+
+4- Clasificación -> muestra la clasificación de los equipos (puntos, partidos jugados, ganados, perdidos empatados)
+5- Pichichis -> muestra los 5 jugadores más goleadores
+0 - Salir
+
