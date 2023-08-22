@@ -2,6 +2,7 @@ from funciones import *
 from añadir_equipo import *
 from clases import *
 from añadir_jugador import *
+from competir import *
 
 global lista_equipos
 lista_equipos=[]
@@ -31,4 +32,7 @@ def main ():
             añadir_jugador(lista_equipos)
             main()
 
+    elif user_input==3:
+            competir(lista_equipos)
+            main()
 main()
