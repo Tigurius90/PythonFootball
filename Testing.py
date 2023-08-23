@@ -6,6 +6,8 @@ class Team:
         self.ganados= ganados
         self.perdidos= perdidos
         self.empatados= empatados
+    def NumPlayers(self):
+        return (len(self.jugadores))
 
 class Player:
      def __init__(self, nombre, posición):
@@ -38,3 +40,9 @@ df = pd.DataFrame(goalsTable)
 df_sorted=df.sort_values(by='Goles',ascending=False)
 
 print(df_sorted.head(5))
+
+
+
+
+for n in range(len(teams_list)):
+    print(teams_list[n].NumPlayers())

@@ -1,10 +1,11 @@
-from add_player import *
+from classPlayer import *
 from classTeam import *
 from add_team import *
 import pandas as pd
 
 
 teams_list=[]
+
 
 
 def pichichis(teams_list):
@@ -102,14 +103,14 @@ def compete (teams_list):
         localGoals=int(score[0])
         visitorGoals=int(score[2])
         if localGoals>visitorGoals:
-            teams_list[localTeam].ganados = teams_list[localTeam].ganados + 1
-            teams_list[visitorTeam].perdidos = teams_list[visitorTeam].perdidos + 1
+            teams_list[localTeam].winner()
+            teams_list[visitorTeam].loser()
         elif localGoals<visitorGoals:
-            teams_list[visitorTeam].ganados =teams_list[visitorTeam].ganados + 1
-            teams_list[localTeam].perdidos = teams_list[localTeam].perdidos + 1
+            teams_list[visitorTeam].winner()
+            teams_list[localTeam].loser()
         else:
-            teams_list[visitorTeam].empatados = teams_list[visitorTeam].empatados + 1
-            teams_list[localTeam].empatados = teams_list[localTeam].empatados + 1
+            teams_list[visitorTeam].draw()
+            teams_list[localTeam].draw()
         while localGoals!=0:
             print("¿Quien ha metido gol en el equipo local?")
             n=0
@@ -158,7 +159,7 @@ def add_player (teams_list):
 def add_team (teams_list):
     print("Escoge Nombre del Equipo")
     newName=input()
-    teams_list.append(Team(newName,[],0,0,0))
+    teams_list.append(Team(newName))
     return (teams_list)
 
 
@@ -179,7 +180,7 @@ def menu ():
     elif user_input==1: 
         if len(teams_list) > 4:
             print ("Numero de equipos excedido, elija otra opcion")
-            return menu()
+            menu()
         else:
            teams_list= add_team(teams_list)
         menu()
@@ -189,8 +190,13 @@ def menu ():
             menu()
 
     elif user_input==3:
-            compete(teams_list)
-            menu()
+        for n in range(len(teams_list)):
+            if teams_list[n].numPlayers() == 0:
+                print ("Añada primero al menos un jugador en cada equipo")
+                menu()
+            #print(teams_list[n].jugadores[0].nombre)
+        compete(teams_list)
+        menu()
 
     elif user_input==5:
             pichichis(teams_list)
