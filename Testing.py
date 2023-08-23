@@ -1,18 +1,5 @@
 import pandas as pd
-class Team:
-    def __init__(self, nombre, jugadores, ganados, perdidos, empatados):
-        self.jugadores=jugadores
-        self.nombre= nombre
-        self.ganados= ganados
-        self.perdidos= perdidos
-        self.empatados= empatados
-    def NumPlayers(self):
-        return (len(self.jugadores))
 
-class Player:
-     def __init__(self, nombre, posición):
-        self.posición=posición
-        self.nombre= nombre
 
 team1= Team("RealMadrid",[Player("Raul","delantero")],0,0,0)
 team2= Team("Pateti",[Player("DiegoCosta","delantero")],0,0,0)

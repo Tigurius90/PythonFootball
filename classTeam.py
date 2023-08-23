@@ -1,12 +1,11 @@
 class Team:
-        
-    ganados = 0
-    perdidos = 0
-    empatados = 0
-    jugadores = []
 
     def __init__(self, nombre):
-            self.nombre=nombre
+        self.nombre=nombre
+        self.ganados = 0
+        self.perdidos = 0
+        self.empatados = 0
+        self.jugadores = []
     def winner(self):
             self.ganados +=1
     def loser(self):
@@ -15,3 +14,5 @@ class Team:
             self.empatados +=1
     def numPlayers(self):
            return (len(self.jugadores))
+    def addPlayer(self, player):
+        self.jugadores.append(player)

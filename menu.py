@@ -1,11 +1,8 @@
 from classPlayer import *
 from classTeam import *
-from add_team import *
 import pandas as pd
 
-
-teams_list=[]
-
+teams_list = []
 
 
 def pichichis(teams_list):
@@ -42,8 +39,8 @@ def test_score(user_input):
                 return (10)
         except ValueError:
             print("introduce el resultado siguiendo el formato: GolesLocal espacio GolesVisitante")
-            return (10) 
-    
+            return (10)
+
 def test_visitorTeam(user_input,min,max,visitor):
     range_1= range(min,max+1,1)
     try:
@@ -67,8 +64,8 @@ def test_input(user_input,min,max):
     except ValueError:
         print("introduce un numero numero dentro del rango")
         return (10)
-    
-def show_teams(teams_list,num): 
+
+def show_teams(num):
     if len(teams_list)<=num:
         print("introduce primero los equipos necesarios")
         return (0)
@@ -88,7 +85,7 @@ def compete (teams_list):
         localTeam=10
         while localTeam==10:
             localTeam = test_input(input(),1,len(teams_list))
-        localTeam=localTeam-1 
+        localTeam=localTeam-1
 
         print("¿Cuales es el visitante?")
         visitorTeam=10
@@ -119,7 +116,7 @@ def compete (teams_list):
                 n+=1
             playerSelected=10
             while playerSelected==10:
-             playerSelected = test_input(input(),0,len(teams_list[localTeam].jugadores)-1)  
+             playerSelected = test_input(input(),0,len(teams_list[localTeam].jugadores)-1)
             playerSelected = int(playerSelected)
             teams_list[localTeam].jugadores[playerSelected].goles += 1
             localGoals-=1
@@ -132,16 +129,16 @@ def compete (teams_list):
                 n+=1
             playerSelected=10
             while playerSelected==10:
-             playerSelected = test_input(input(),0,len(teams_list[visitorGoals].jugadores)-1)  
+             playerSelected = test_input(input(),0,len(teams_list[visitorGoals].jugadores)-1)
             playerSelected = int(playerSelected)
             teams_list[visitorGoals].jugadores[playerSelected].goles += 1
             visitorGoals-=1
 
         return (teams_list)
-    
 
-def add_player (teams_list):
-    if show_teams(teams_list,0)==0:
+
+def add_player ():
+    if show_teams(0)==0:
         return
     else:
         print("Escoge el número del equipo que quieres añadir jugador")
@@ -150,23 +147,22 @@ def add_player (teams_list):
                 teamSelected = test_input(input(),1,len(teams_list))
 
         print("Introduce el nombre del jugador")
-        teams_list[teamSelected- 1].jugadores.append(Player(input(),0))
-        # para testear - cirstobal, hay alguna otra manera de verlo? print (teams_list[0].jugadores[0].nombre)
+        name = input()
+        new_player = Player(name, 0)
+        team = teams_list[teamSelected- 1]
+        team.addPlayer(new_player)
+        print(teams_list)
 
-        return (teams_list)
-    
-
-def add_team (teams_list):
+def add_team ():
     print("Escoge Nombre del Equipo")
     newName=input()
     teams_list.append(Team(newName))
-    return (teams_list)
 
 
 def menu ():
     global teams_list
     options=["0 - Salir", "1- Añadir equipo","2- Añadir jugador","3- Competir","4- Clasificación","5- Pichichis"]
-    for x in options: 
+    for x in options:
         print (x)
 
 # Chequea que no sea un numero del menu
@@ -177,16 +173,16 @@ def menu ():
     if user_input==0:
         print("Hasta la vista")
         exit()
-    elif user_input==1: 
+    elif user_input==1:
         if len(teams_list) > 4:
             print ("Numero de equipos excedido, elija otra opcion")
             menu()
         else:
-           teams_list= add_team(teams_list)
+           add_team()
         menu()
 
     elif user_input==2:
-            teams_list=add_player(teams_list)
+            add_player()
             menu()
 
     elif user_input==3:
