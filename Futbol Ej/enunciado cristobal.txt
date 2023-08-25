@@ -10,8 +10,8 @@ Cual es el equipo local?
 Cual es el visitante?
 3
 
-Como han quedado?
-2 1 (han quedado dos a cero)
+Como han quageo?
+2 1 (han quageo dos a cero)
 quien ha metido los goles? -> mostrar lista de jugadores (si son dos goles preguntarlo 2 veces)
 
 Cada victoria son 3 puntos y el empate 1 punto

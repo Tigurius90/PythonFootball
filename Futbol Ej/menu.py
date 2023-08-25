@@ -77,7 +77,7 @@ def show_teams(num):
 
 
 def compete (teams_list):
-    if show_teams(teams_list,1)==0:
+    if show_teams(1)==0:
         return
     else:
 
@@ -93,7 +93,7 @@ def compete (teams_list):
             visitorTeam = test_visitorTeam(input(),1,len(teams_list),localTeam+1)
         visitorTeam=visitorTeam-1
 
-        print("¿Como han quedado?")
+        print("¿Como han quageo?")
         score=10
         while score==10:
              score = test_score(input())
@@ -124,14 +124,14 @@ def compete (teams_list):
         while visitorGoals!=0:
             print("¿Quien ha metido gol en el equipo visitante?")
             n=0
-            for x in teams_list[visitorGoals].jugadores:
+            for x in teams_list[visitorTeam].jugadores:
                 print("{}-".format(n)+x.nombre)
                 n+=1
             playerSelected=10
             while playerSelected==10:
-             playerSelected = test_input(input(),0,len(teams_list[visitorGoals].jugadores)-1)
+             playerSelected = test_input(input(),0,len(teams_list[visitorTeam].jugadores)-1)
             playerSelected = int(playerSelected)
-            teams_list[visitorGoals].jugadores[playerSelected].goles += 1
+            teams_list[visitorTeam].jugadores[playerSelected].goles += 1
             visitorGoals-=1
 
         return (teams_list)

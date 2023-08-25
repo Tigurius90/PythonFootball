@@ -1,0 +1,19 @@
+Juan tiene mates lengua
+Alex tiene mates y geografía
+Ignacio tiene geografía e historia
+Diego programacion e historia
+Alberto gimnasia y progrmación (en gimnasia hay dos notas: teoria y practica), se tiene que apribar las 2 para aprobar la asignatura
+
+Cristobal profesor de progrmacion
+Laura profesora de historia y mates
+Adriana profesora de geografía y lengua
+
+menú()
+1- ver asignaturas -> se muestra listado e todas las asignaturas y seleccionas la que quieres ->  se muestra los alumnos(nombre y age) y el nombre del profesor de esa asignatura
+2- ver profesores, se muestra los profesores con sus asignaturas(obligatorio con diccionario)
+3- examen -> de que asignatura? mostrar listado de asignatuas -> (si seleccionamos mates)que ha sacado Juan? -> insertar nota -> que ha sacado Alex? -> insertar nota
+4- ver notas -> de que alumno? mostrar las notas de cada asigatura, su nota media, si está aprobada aparece que está aprobada y la nota que ha sacado, si está suspensa aperece que está suspenso, la nota más alta que ha sacado en sus examenes y las convocatorias que lleva realizadas
+5- ver numero de nota, e.j Que numero quieres ver?7,2, Muestra todos los alumnos que hayan sacado un 7,2 en sus examenes
+
+si un alumno suspende 3 veces una asignatura se le expulsa del cole.
+si un alumno aprueba se le retira la asignatura y ya no se puede volver a examinar
