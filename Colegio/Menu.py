@@ -4,6 +4,7 @@ from Subject import *
 #meto datos enunciado
 studentList=[]
 teachersList=[]
+dicMarks={0:[]}
 
 studentList.append(Person("juan","Estudiante"))
 studentList[0].subjects= [Subject("Mates"),Subject("Lengua")]
@@ -38,17 +39,24 @@ teachersList[2].subjects= [Subject("Geo"),Subject("Lengua")]
 
 
 def showStudentWithMark():
-    print(studentList[0].dicMarkName())
+    mark=float(input("¿Que nota quieres que busque?"))
+    print(set(dicMarks[mark]))
+    main()
 
 
 def examen(userSelectionMenu):
+    global dicMarks
     uniqueListSubjects=showSubjects(userSelectionMenu)
     userSelectionSubject=(input("Escoja asignatura: "))
     for x in studentList:
         for y in x.subjects:
             if y.name ==list(uniqueListSubjects)[int(userSelectionSubject)] and y.passed==False:
-                mark=int(input("Que nota ha tenido " + x.name +"?: "))
+                mark=float(input("Que nota ha tenido " + x.name +"?: "))
                 y.marks.append(mark)
+                try:
+                    dicMarks[mark].append(x.name)
+                except:
+                    dicMarks[mark]=[x.name]
                 if mark>=5:
                     y.passed=True
                 else:
@@ -125,8 +133,7 @@ main()
 
 
 
-#studentList[1].materias= {"gym":[ {"teorico": []}, {"parctico": []}  ],"programación":[]}
-#print(studentList[1].materias["gym"])
+
 
 
 
