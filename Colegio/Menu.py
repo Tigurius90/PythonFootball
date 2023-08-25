@@ -36,6 +36,42 @@ teachersList[2].subjects= [Subject("Geo"),Subject("Lengua")]
 
 
 
+
+def showStudentWithMark():
+    print(studentList[0].dicMarkName())
+
+
+def examen(userSelectionMenu):
+    uniqueListSubjects=showSubjects(userSelectionMenu)
+    userSelectionSubject=(input("Escoja asignatura: "))
+    for x in studentList:
+        for y in x.subjects:
+            if y.name ==list(uniqueListSubjects)[int(userSelectionSubject)] and y.passed==False:
+                mark=int(input("Que nota ha tenido " + x.name +"?: "))
+                y.marks.append(mark)
+                if mark>=5:
+                    y.passed=True
+                else:
+                    if y.suspensoCheck()==True:
+                        studentList.remove(x)
+    main()
+
+
+def showMarks():
+    c=0
+    for x in studentList:
+        print(str(c)+"-"+x.name)
+        c +=1
+    userSelection=int((input("Escoja un alumno: ")))
+    print("Nota media: "+str(studentList[userSelection].meanMarks()))
+    print("Nota más alta: "+str(studentList[userSelection].maxMarks()))
+    print("Número de convocatorias totales: "+str(studentList[userSelection].numMarks()))
+    for x in studentList[userSelection].subjects:
+        if len(x.marks)>0:
+            print("Estas son las notas de la asignatura "+x.name,x.marks)
+            print("Esta suspenso" if x.passed==False else "Esta aprobado")
+    main()
+
 def showTeachers():
     for x in teachersList:
         print(x.dicNameSubjects())
@@ -51,7 +87,7 @@ def showTeacherStudents(uniqueListSubjects):
     main()
 
 
-def showSubjects():
+def showSubjects(userSelection):
     subjects_list=[]
     for x in studentList :
         for y in x.subjects:
@@ -61,7 +97,11 @@ def showSubjects():
     for x in uniqueListSubjects:
         print(c,"-",x)
         c+=1
-    showTeacherStudents(uniqueListSubjects)
+    if userSelection=="1":
+        showTeacherStudents(uniqueListSubjects)
+    else:
+        return(uniqueListSubjects)
+
 
     
 
@@ -69,9 +109,16 @@ def main():
     print(" 1-Ver asignaturas \n 2-Ver profesores \n 3-Examen \n 4-Ver notas \n 5-Ver numero de nota")
     userSelection=(input("Escoja opción: "))
     if userSelection=="1":
-        showSubjects()
+        showSubjects(userSelection)
     if userSelection=="2":
         showTeachers()
+    if userSelection=="3":
+        examen(userSelection)
+    if userSelection=="4":
+        showMarks()
+    if userSelection=="5":
+        showStudentWithMark()
+        
 
 main()
 
