@@ -93,7 +93,7 @@ def compete (teams_list):
             visitorTeam = test_visitorTeam(input(),1,len(teams_list),localTeam+1)
         visitorTeam=visitorTeam-1
 
-        print("¿Como han quedado?")
+        print("¿Como han quageo?")
         score=10
         while score==10:
              score = test_score(input())
