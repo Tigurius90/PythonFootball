@@ -18,4 +18,4 @@ class Subject:
             print(self.name+ " debe ser expulsado")
             return(True)
 
-
+#ejemplo cambio para pr
