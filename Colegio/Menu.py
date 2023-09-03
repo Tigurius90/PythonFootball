@@ -2,43 +2,61 @@ from Person import *
 from Subject import *
 
 #meto datos enunciado
-studentList=[]
-teachersList=[]
+allList=[]
 dicMarks={0:[]}
+uniqueListSubjects=[]
 
-studentList.append(Person("juan","Estudiante"))
-studentList[0].subjects= [Subject("Mates"),Subject("Lengua")]
-studentList[0].age= 21
-
-studentList.append(Person("Alex","Estudiante"))
-studentList[1].subjects= [Subject("Mates"),Subject("Geo")]
-studentList[1].age= 22
-
-studentList.append(Person("Diego","Estudiante"))
-studentList[2].subjects= [Subject("Geo"),Subject("Historia")]
-studentList[2].age= 23
-
-studentList.append(Person("Ignacio","Estudiante"))
-studentList[3].subjects= [Subject("Programación"),Subject("Historia")]
-studentList[3].age= 24
-
-studentList.append(Person("Alberto","Estudiante"))
-studentList[4].subjects= [Subject("Programación"),Subject("Gym")]
-studentList[4].age= 25
-
-teachersList.append(Person("Cristobal","Profesor"))
-teachersList[0].subjects= [Subject("Programación")]
-
-teachersList.append(Person("Laura","Profesor"))
-teachersList[1].subjects= [Subject("Historia"),Subject("Mates")]
-
-teachersList.append(Person("Adriana ","Profesor"))
-teachersList[2].subjects= [Subject("Geo"),Subject("Lengua")]
+allList.append(Person())
+allList[0].name="Juan"
+allList[0].subjects= [Subject("Mates"),Subject("Lengua")]
+allList[0].age= 21
+allList[0].role=Role.student
 
 
+allList.append(Person())
+allList[1].name="Alex"
+allList[1].subjects= [Subject("Mates"),Subject("Geo")]
+allList[1].age= 22
+allList[1].role=Role.student
+
+allList.append(Person())
+allList[2].name="Diego"
+allList[2].subjects= [Subject("Geo"),Subject("Historia")]
+allList[2].age= 23
+allList[2].role=Role.student
+
+allList.append(Person())
+allList[3].name="Ignacio"
+allList[3].subjects= [Subject("Programación"),Subject("Historia")]
+allList[3].age= 24
+allList[3].role=Role.student
+
+allList.append(Person())
+allList[4].name="Alberto"
+allList[4].subjects= [Subject("Programación"),Subject("Gym")]
+allList[4].age= 25
+allList[4].role=Role.student
+
+allList.append(Person())
+allList[5].name="Cristobal"
+allList[5].subjects= [Subject("Programación")]
+allList[5].role=Role(1)
+
+allList.append(Person())
+allList[6].name="Laura"
+allList[6].subjects= [Subject("Historia"),Subject("Mates")]
+allList[6].role=Role(1)
+
+allList.append(Person())
+allList[7].name="Adriana"
+allList[7].subjects= [Subject("Geo"),Subject("Lengua")]
+allList[7].role=Role(1)
 
 
-def showStudentWithMark():
+
+
+
+def showstudentWithMark():
     mark=float(input("¿Que nota quieres que busque?"))
     print(set(dicMarks[mark]))
     main()
@@ -46,13 +64,14 @@ def showStudentWithMark():
 
 def examen(userSelectionMenu):
     global dicMarks
-    uniqueListSubjects=showSubjects(userSelectionMenu)
+    showSubjects()
     userSelectionSubject=(input("Escoja asignatura: "))
-    for x in studentList:
+    for x in allList:
         for y in x.subjects:
-            if y.name ==list(uniqueListSubjects)[int(userSelectionSubject)] and y.passed==False:
+            if y.name ==list(uniqueListSubjects)[int(userSelectionSubject)] and y.passed==False and x.role==Role.student:
                 mark=float(input("Que nota ha tenido " + x.name +"?: "))
                 y.marks.append(mark)
+                y.convocatorias += 1
                 try:
                     dicMarks[mark].append(x.name)
                 except:
@@ -61,71 +80,64 @@ def examen(userSelectionMenu):
                     y.passed=True
                 else:
                     if y.suspensoCheck()==True:
-                        studentList.remove(x)
+                        allList.remove(x)
     main()
 
 
 def showMarks():
-    c=0
-    for x in studentList:
+    for c, x in enumerate(allList):
         print(str(c)+"-"+x.name)
-        c +=1
     userSelection=int((input("Escoja un alumno: ")))
-    print("Nota media: "+str(studentList[userSelection].meanMarks()))
-    print("Nota más alta: "+str(studentList[userSelection].maxMarks()))
-    print("Número de convocatorias totales: "+str(studentList[userSelection].numMarks()))
-    for x in studentList[userSelection].subjects:
-        if len(x.marks)>0:
-            print("Estas son las notas de la asignatura "+x.name,x.marks)
-            print("Esta suspenso" if x.passed==False else "Esta aprobado")
+    allList[userSelection].meanMarks()
+    allList[userSelection].maxMarks()
+    allList[userSelection].numMarks()
+    allList[userSelection].numConv()
+
+
     main()
 
-def showTeachers():
-    for x in teachersList:
-        print(x.dicNameSubjects())
+def showteachers():
+    for person in allList:
+        if person.role==Role.teacher:
+            print(person.dicNameSubjects())
 
 
-def showTeacherStudents(uniqueListSubjects):
-    userSelection=(input("Escoja opción para ver profesores y alumnos: "))
+def showteacherstudents():
+    userSelection=(input("Escoja opción para ver teacheres y alumnos: "))
     #print(list(uniqueListSubjects)[0])
-    for x in studentList+teachersList:
-        for y in x.subjects:
-            if y.name ==list(uniqueListSubjects)[int(userSelection)]:
-                print (x.name, str(x.age) + " años" if x.role=="Estudiante" else "Profesor/a")
+    for student in allList:
+        student.showData(userSelection,uniqueListSubjects)
     main()
 
 
-def showSubjects(userSelection):
+def showSubjects():
+    global uniqueListSubjects
     subjects_list=[]
-    for x in studentList :
+    for x in allList :
         for y in x.subjects:
             subjects_list.append(y.name)
     uniqueListSubjects=set(subjects_list)
-    c=0
-    for x in uniqueListSubjects:
+    for c, x in enumerate(uniqueListSubjects):
         print(c,"-",x)
-        c+=1
-    if userSelection=="1":
-        showTeacherStudents(uniqueListSubjects)
-    else:
-        return(uniqueListSubjects)
+
 
 
     
 
 def main():
-    print(" 1-Ver asignaturas \n 2-Ver profesores \n 3-Examen \n 4-Ver notas \n 5-Ver numero de nota")
+    print(" 1-Ver asignaturas \n 2-Ver teacheres \n 3-Examen \n 4-Ver notas \n 5-Ver numero de nota")
     userSelection=(input("Escoja opción: "))
     if userSelection=="1":
-        showSubjects(userSelection)
+        showSubjects()
+        showteacherstudents()
     if userSelection=="2":
-        showTeachers()
+        showteachers()
     if userSelection=="3":
         examen(userSelection)
     if userSelection=="4":
         showMarks()
     if userSelection=="5":
-        showStudentWithMark()
+        showstudentWithMark()
         
 
 main()

@@ -7,6 +7,7 @@ class Subject:
           self.practice=[]
           self.theory=[]
           self.passed=False
+          self.convocatorias= 0
 
     
     def suspensoCheck(self):
@@ -15,7 +16,7 @@ class Subject:
             if x<5:
                 suspenso +=1
         if suspenso>=3:
-            print(self.name+ " debe ser expulsado")
+            print(self.name + " debe ser expulsado")
             return(True)
 
 #ejemplo cambio para pr
