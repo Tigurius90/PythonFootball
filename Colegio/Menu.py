@@ -100,6 +100,7 @@ def showteachers():
     for person in allList:
         if person.role==Role.teacher:
             print(person.dicNameSubjects())
+    main()
 
 
 def showteacherstudents():

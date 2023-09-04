@@ -16,7 +16,7 @@ class Subject:
             if x<5:
                 suspenso +=1
         if suspenso>=3:
-            print(self.name + " debe ser expulsado")
+            print("Debe ser expulsado")
             return(True)
 
 #ejemplo cambio para pr
