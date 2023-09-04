@@ -1,10 +1,19 @@
 from Subject import *
 from Role import *
 
-class Person:
-    name=str
-    age=0
-    subjects= []
+class Person():
+    passed=False
+    convocatorias=0
+
+    def __init__(self,name,age,role,subject):
+        self.name=name
+        self.age=age
+        self.role=role
+        self.marks=[]
+        self.subject=subject
+
+
+
 
 
 
@@ -25,36 +34,31 @@ class Person:
 
     def meanMarks(self):
         allMarks=[]
-        for x in self.subjects:
-            for y in x.marks:
-                allMarks.append(y)
-        print("Nota media: "+str("No tiene notas" if len(allMarks)==0 else (sum(allMarks)/len(allMarks))))
+        for mark in self.marks:
+            allMarks.append(mark)
+        print("Nota media en "+self.subject+": "+str("No tiene notas" if len(allMarks)==0 else (sum(allMarks)/len(allMarks))))
 
     
     def maxMarks(self):
         allMarks=[]
-        for x in self.subjects:
-            for y in x.marks:
-                allMarks.append(y)
-        print("Nota más alta: "+str("No tiene notas" if len(allMarks)==0 else max(allMarks)))
-    
-    def numMarks(self):
-        allMarks=[]
-        for x in self.subjects:
-            for y in x.marks:
-                allMarks.append(y)
-        print("Número de convocatorias totales: "+str( "No tiene notas" if len(allMarks)==0 else len(allMarks)))
+        for mark in self.marks:
+            allMarks.append(mark)
+        print("Nota más alta en "+self.subject+": "+str("No tiene notas" if len(allMarks)==0 else max(allMarks)))
     
 
     def numConv(self):
-        for x in self.subjects:
-            if len(x.marks)>0:
-                print("Estas son las notas de la asignatura "+x.name,x.marks)
-                print("Esta suspenso" if x.passed==False else "Esta aprobado")
-
+        allMarks=[]
+        for mark in self.marks:
+            allMarks.append(mark)
+        print("Estas son las notas de la asignatura "+self.subject+":" +str(allMarks))
+        print("Esta suspenso" if self.passed==False else "Esta aprobado")
+        print("Numero de convocatorias:" +str(self.convocatorias))
 
     def showData(self,userSelection,uniqueListSubjects):
         for subject in self.subjects:
             if subject.name ==list(uniqueListSubjects)[int(userSelection)]:
                 print (self.name, str(self.age) + " años " + str(self.role.name))
 
+    def suspensoCheck(self):
+        if self.convocatorias>3:
+            print("Debe ser expulsado")
